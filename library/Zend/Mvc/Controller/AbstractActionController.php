@@ -50,6 +50,10 @@ abstract class AbstractActionController extends AbstractController
         $response   = $this->response;
         $event      = $this->getEvent();
         $routeMatch = $event->getRouteMatch();
+        
+        if($response instanceof \Zend\Console\Response) {
+            return null;
+        }
 
         $response->setStatusCode(404);
         $routeMatch->setParam('action', 'not-found');
